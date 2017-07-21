@@ -60,23 +60,26 @@ navs:
     label: Home
 
   -
-    href: /blogs
-    label: Blogs
+    href: /java
+    label: Java
     
   -
-    href: /blog
-    label: Archives
+    href: /nosql
+    label: Nosql
+  -
+    href: /database
+    label: Database
 
   -
-    href: /link
-    label: Link
+    href: /architecture
+    label: Architecture
     
   -
     href: /about
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 5 # Number of repos to show
+side_bar_repo_limit: 6 # Number of repos to show
 
 # Google Analytics
 # analytics :
