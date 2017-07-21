@@ -10,6 +10,8 @@ title: java 学习笔记 # ex. I m Chuan
 name: Think in java # ex. DONGChuan
 email: zhanghaichang@163.com
 location: shanghai,china # ex. Nice, France
+company: quarkfinance
+company_url: http://www.quarkfinance.com
 github_url: https://github.com/zhanghaichang # ex. https://github.com/DONGChuan
 description: coding change the world.
 favicon: favicon.png # Image must be in assets/images
