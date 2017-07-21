@@ -7,7 +7,7 @@
 
 # Site settings
 title: Just do it # ex. I m Chuan
-name: Think in hava # ex. DONGChuan
+name: zhanghaichang # ex. DONGChuan
 email: zhanghaichang@163.com
 location: shanghai,china # ex. Nice, France
 company: quarkfinance
@@ -61,6 +61,10 @@ navs:
 
   -
     href: /blog
+    label: Blogs
+    
+  -
+    href: /blog
     label: Archives
 
   -
@@ -72,7 +76,7 @@ navs:
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 4 # Number of repos to show
+side_bar_repo_limit: 5 # Number of repos to show
 
 # Google Analytics
 # analytics :
