@@ -73,6 +73,10 @@ navs:
   -
     href: /architecture
     label: Architecture
+    
+  -
+    href: /designpattern
+    label: Designpattern
   -
     href: /other
     label: Other
