@@ -20,7 +20,7 @@ repository: zhanghaichang/zhanghaichang.github.io # ex. DONGChuan/DONGChuan.gith
 # The base hostname & protocol for your site
 # For local test, please use http://localhost:4000
 # For production, use your github page url. ex. http://dongchuan.github.io
-url: http://www.dwring.com
+url: http://dwring.com
 
 ## Gem
 gems:
@@ -72,7 +72,7 @@ navs:
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 6 # Number of repos to show
+side_bar_repo_limit: 4 # Number of repos to show
 
 # Google Analytics
 # analytics :
