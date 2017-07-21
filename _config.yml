@@ -64,9 +64,6 @@ navs:
     label: Java
     
   -
-    href: /nosql
-    label: Nosql
-  -
     href: /database
     label: Database
 
@@ -86,7 +83,7 @@ navs:
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 7 # Number of repos to show
+side_bar_repo_limit: 6 # Number of repos to show
 
 # Google Analytics
 # analytics :
