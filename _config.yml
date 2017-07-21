@@ -15,7 +15,7 @@ company_url: http://www.quarkfinance.com
 github_url: https://github.com/zhanghaichang # ex. https://github.com/DONGChuan
 description: coding change the world.
 favicon: favicon.png # Image must be in assets/images
-repository: ityouknow/ityouknow.github.io # ex. DONGChuan/DONGChuan.github.io
+repository: zhanghaichang/zhanghaichang.github.io # ex. DONGChuan/DONGChuan.github.io
 
 # The base hostname & protocol for your site
 # For local test, please use http://localhost:4000
@@ -62,9 +62,6 @@ navs:
  -
     href: /blog
     label: Blog
-  -
-    href: /blog
-    label: Archives
 
   -
     href: /link
