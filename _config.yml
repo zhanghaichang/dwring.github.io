@@ -6,21 +6,22 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: "java 学习笔记" # ex. I m Chuan
-name: Think in java # ex. DONGChuan
-email: zhanghaichang@163.com
-location: shanghai,china # ex. Nice, France
-company: quarkfinance
-company_url: http://www.quarkfinance.com
-github_url: https://github.com/zhanghaichang # ex. https://github.com/DONGChuan
-description: coding change the world.
+title: keep pure more smile # ex. I m Chuan
+name: 纯洁的微笑 # ex. DONGChuan
+email: ityouknow@126.com
+location: beijing,china # ex. Nice, France
+company: cloudfavorites
+company_url: https://github.com/cloudfavorites
+github_url: https://github.com/ityouknow # ex. https://github.com/DONGChuan
+cnblog_url: http://www.cnblogs.com/ityouknow
+description: the world is colorful
 favicon: favicon.png # Image must be in assets/images
-repository: zhanghaichang/zhanghaichang.github.io # ex. DONGChuan/DONGChuan.github.io
+repository: ityouknow/ityouknow.github.io # ex. DONGChuan/DONGChuan.github.io
 
 # The base hostname & protocol for your site
 # For local test, please use http://localhost:4000
 # For production, use your github page url. ex. http://dongchuan.github.io
-url: http://dwring.com
+url: http://ityouknow.com
 
 ## Gem
 gems:
@@ -59,9 +60,20 @@ navs:
     href: /
     label: Home
 
- -
+  -
+    href: /spring-boot
+    label: Spring-Boot
+  -
+    href: /spring-cloud
+    label: Spring-Cloud
+
+#  -
+#    href: /open-source
+#    label: Open-Source
+
+  -
     href: /blog
-    label: Blog
+    label: Archives
 
   -
     href: /link
@@ -72,7 +84,7 @@ navs:
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 4 # Number of repos to show
+side_bar_repo_limit: 6 # Number of repos to show
 
 # Google Analytics
 # analytics :
