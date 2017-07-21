@@ -73,7 +73,7 @@ navs:
     
   -
     href: /designpattern
-    label: Designpattern
+    label: Java pattern
   -
     href: /other
     label: Other
@@ -83,7 +83,7 @@ navs:
     label: About
 
 # Sidebar to show popular repo
-side_bar_repo_limit: 6 # Number of repos to show
+side_bar_repo_limit: 8 # Number of repos to show
 
 # Google Analytics
 # analytics :
