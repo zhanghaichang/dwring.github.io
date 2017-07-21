@@ -73,6 +73,9 @@ navs:
   -
     href: /architecture
     label: Architecture
+  -
+    href: /other
+    label: Other
     
   -
     href: /about
