@@ -1,9 +1,10 @@
+---
 yout: post
 title: Java基础面试题
 category: interview
 tags: [interview]
 ---
-#### JAVA基础
+#### JAVA基础篇
 
 - JAVA中的几种基本数据类型是什么，各自占用多少字节。
 - String类能被继承吗，为什么。
