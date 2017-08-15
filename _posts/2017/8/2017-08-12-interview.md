@@ -1,5 +1,5 @@
 ---
-yout: post
+layout: post
 title: Java基础面试题
 category: interview
 tags: [interview]
