@@ -1,5 +1,5 @@
 ---
-yout: post
+layout: post
 title: httpclient详解
 category: java
 tags: [java]
