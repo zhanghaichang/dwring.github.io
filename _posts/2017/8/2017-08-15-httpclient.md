@@ -369,7 +369,7 @@ public class HttpClientUtilTest {
 }
 
 ```
-#### 调用
+
 ```java
 @RequestMapping(value = "/test/send")
 	@ResponseBody
