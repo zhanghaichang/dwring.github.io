@@ -4,7 +4,7 @@ title: HTTP访问控制
 category: java
 tags: [java]
 ---
-#HTTP访问控制
+# HTTP访问控制
 
 
 <div>当一个资源从与该资源本身所在的服务器不同的域或端口不同的域或不同的端口请求一个资源时，资源会发起一个**跨域 HTTP 请求**。</div>
