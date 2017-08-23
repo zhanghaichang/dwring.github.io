@@ -5,7 +5,7 @@ category: java
 tags: [java]
 ---
 # HTTP Header 详解
-HTTP（HyperTextTransferProtocol）即超文本传输协议，目前网页传输的的通用协议。HTTP协议采用了请求/响应模型，浏览器或其他客户端发出请求，服务器给与响应。就整个网络资源传输而言，包括message-header和message-body两部分。首先传递message-header，即http **header消息** **http header** 
+HTTP（HyperTextTransferProtocol）即超文本传输协议，目前网页传输的的通用协议。HTTP协议采用了请求/响应模型，浏览器或其他客户端发出请求，服务器给与响应。就整个网络资源传输而言，HTTP的头域包括通用头，请求头，响应头和实体头四个部分。每个头域由一个域名，冒号（:）和域值三部分组成。首先传递message-header，即http **header消息** **http header** 
 * 消息通常被分为4个部分：
     * general  
     * header
@@ -14,6 +14,93 @@ HTTP（HyperTextTransferProtocol）即超文本传输协议，目前网页传输
     * response header
     * entity header  
 但是这种分法就理解而言，感觉界限不太明确。根据维基百科对http header内容的组织形式，大体分为Request和Response两部分。
+## HTTP请求方式
+如下表：
+<table align="center" border="0" cellpadding="0" cellspacing="0" class="  " style="font-size:14px; empty-cells:show">
+<tbody>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+GET</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+向Web服务器请求一个文件</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+POST</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+向Web服务器发送数据让Web服务器进行处理</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+PUT</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+向Web服务器发送数据并存储在Web服务器内部</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+HEAD</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+检查一个对象是否存在</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+DELETE</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+从Web服务器上删除一个文件</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+CONNECT</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+对通道提供支持</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+TRACE</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+跟踪到服务器的路径</p>
+</td>
+</tr>
+<tr>
+<td style="width:123px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+OPTIONS</p>
+</td>
+<td style="width:312px">
+<p style="margin-top:20px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+查询Web服务器的性能</p>
+</td>
+</tr>
+</tbody>
+</table>
+
 ## Requests部分 
 <table border="1" cellpadding="0" width="100%">
 <tbody>
