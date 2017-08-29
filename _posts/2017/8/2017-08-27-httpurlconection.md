@@ -207,11 +207,11 @@ urlCon.setReadTimeout(<span style="color:#C00000;">30000</span>);  
 #### URLConnection和HttpURLConnection使用的都是java.net中的类，属于标准的java接口。HttpURLConnection继承自URLConnection,差别在与HttpURLConnection仅仅针对Http连接。
 
 #### 基本步骤:
-    # 1) 创建 URL 以及 URLConnection / HttpURLConnection 对象
-    #2) 设置连接参数
-    #3) 连接到服务器
-    #4) 向服务器写数据
-    #5)从服务器读取数据
+    * 1) 创建 URL 以及 URLConnection / HttpURLConnection 对象
+    * 2) 设置连接参数
+    * 3) 连接到服务器
+    * 4) 向服务器写数据
+    * 5)从服务器读取数据
 
 ```java
 public void urlConnection()
