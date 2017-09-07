@@ -120,7 +120,8 @@ Spring初始化时，会通过该抽象类的setApplicationContext(ApplicationCo
 以下是实现ApplicationContextAware接口方式的代码，前面两种方法类似：
 ```java
 public class SpringContextUtil implements ApplicationContextAware {
-	// Spring应用上下文环境private static ApplicationContext applicationContext;
+	// Spring应用上下文环境
+	private static ApplicationContext applicationContext;
 	/**
 	 *  实现ApplicationContextAware接口的回调方法，设置上下文环境
         * @param applicationContext
