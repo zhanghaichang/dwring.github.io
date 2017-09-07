@@ -104,9 +104,9 @@ ApplicationContext ac1 = WebApplicationContextUtils.getRequiredWebApplicationCon
 ApplicationContext ac2 = WebApplicationContextUtils.getWebApplicationContext(ServletContext sc);
 ac1.getBean("beanId");
 ac2.getBean("beanId");
+```
 说明：这种方式适合于采用Spring框架的B/S系统，通过ServletContext对象获取ApplicationContext对象，然后在通过它获取需要的类实例。
 上面两个工具方式的区别是，前者在获取失败时抛出异常，后者返回null。
-```
 #### 方式九：
 继承自抽象类ApplicationObjectSupport  
 说明：抽象类ApplicationObjectSupport提供getApplicationContext()方法，可以方便的获取ApplicationContext。 
@@ -119,11 +119,31 @@ Spring初始化时，会通过该抽象类的setApplicationContext(ApplicationCo
 说明：实现该接口的setApplicationContext(ApplicationContext context)方法，并保存ApplicationContext 对象。Spring初始化时，会通过该方法将ApplicationContext对象注入。 
 以下是实现ApplicationContextAware接口方式的代码，前面两种方法类似：
 ```java
-public class SpringContextUtil implements ApplicationContextAware {// Spring应用上下文环境private static ApplicationContext applicationContext;/** * 实现ApplicationContextAware接口的回调方法，设置上下文环境 * * @param applicationContext */public void setApplicationContext(ApplicationContext applicationContext) {
-SpringContextUtil.applicationContext = applicationContext;
-}/** * @return ApplicationContext */public static ApplicationContext getApplicationContext() {return applicationContext;
-}/** * 获取对象 * * @param name * @return Object * @throws BeansException */public static Object getBean(String name) throws BeansException {return applicationContext.getBean(name);
-}
+public class SpringContextUtil implements ApplicationContextAware {
+	// Spring应用上下文环境private static ApplicationContext applicationContext;
+	/**
+	 *  实现ApplicationContextAware接口的回调方法，设置上下文环境
+        * @param applicationContext
+	 */
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		SpringContextUtil.applicationContext = applicationContext;
+	}
+
+	/** 
+       * @return ApplicationContext 
+       */
+	public static ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	/** 获取对象
+       *  @param name 
+       * @return Object 
+       * @throws BeansException 
+       */
+	public static Object getBean(String name) throws BeansException {
+		return applicationContext.getBean(name);
+	}
 }
 ```
 虽然，spring提供的后三种方法可以实现在普通的类中继承或实现相应的类或接口来获取spring 的ApplicationContext对象，但是在使用是一定要注意实现了这些类或接口的普通java类一定要在Spring 的配置文件applicationContext.xml文件中进行配置。否则获取的ApplicationContext对象将为null。
