@@ -4,9 +4,6 @@ title: 并发编程-Concurrent用户指南
 category: java
 tags: [java]
 ---
-
-# 译序
-
 本指南根据 Jakob Jenkov 最新博客翻译，请随时关注博客更新：[http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。
 本指南已做成中英文对照阅读版的 pdf 文档，有兴趣的朋友可以去 [Java并发工具包java.util.concurrent用户指南中英文对照阅读版.pdf[带书签]](http://download.csdn.net/detail/defonds/8469189) 进行下载。
 
