@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 其他
+title: HTTP Header 详解
 category: java
 tags: [java]
 ---
