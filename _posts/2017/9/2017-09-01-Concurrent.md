@@ -10,7 +10,7 @@ tags: [java]
 本指南根据 Jakob Jenkov 最新博客翻译，请随时关注博客更新：[http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。
 本指南已做成中英文对照阅读版的 pdf 文档，有兴趣的朋友可以去 [Java并发工具包java.util.concurrent用户指南中英文对照阅读版.pdf[带书签]](http://download.csdn.net/detail/defonds/8469189) 进行下载。
 
-# 1\. java.util.concurrent - Java 并发工具包
+# 1. java.util.concurrent - Java 并发工具包
 
 Java 5 添加了一个新的包到 Java 平台，java.util.concurrent 包。这个包包含有一系列能够让 Java 的并发编程变得更加简单轻松的类。在这个包被添加以前，你需要自己去动手实现自己的相关工具类。
 本文我将带你一一认识 java.util.concurrent 包里的这些类，然后你可以尝试着如何在项目中使用它们。本文中我将使用 Java 6 版本，我不确定这和 Java 5 版本里的是否有一些差异。
@@ -20,7 +20,7 @@ Java 5 添加了一个新的包到 Java 平台，java.util.concurrent 包。这�
 
 本文很大程度上还是个 "半成品"，所以当你发现一些被漏掉的类或接口时，请耐心等待。在我空闲的时候会把它们加进来的。
 
-# 2\. 阻塞队列 BlockingQueue
+# 2. 阻塞队列 BlockingQueue
 
 java.util.concurrent 包里的 BlockingQueue 接口表示一个线程安放入和提取实例的队列。本小节我将给你演示如何使用这个 BlockingQueue。
 本节不会讨论如何在 Java 中实现一个你自己的 BlockingQueue。如果你对那个感兴趣，参考《[Java 并发指南](http://tutorials.jenkov.com/java-concurrency/index.html)》
@@ -128,7 +128,7 @@ BlockingQueue 是个接口，你需要使用它的实现之一来使用 Blocking
     }
 }</pre>
 
-# 3\. 数组阻塞队列 ArrayBlockingQueue
+# 3. 数组阻塞队列 ArrayBlockingQueue
 
 ArrayBlockingQueue 类实现了 BlockingQueue 接口。
 ArrayBlockingQueue 是一个有界的阻塞队列，其内部实现是将对象放到一个数组里。有界也就意味着，它不能够存储无限多数量的元素。它有一个同一时间能够存储元素数量的上限。你可以在对其初始化的时候设定这个上限，但之后就无法对这个上限进行修改了(译者注：因为它是基于数组实现的，也就具有数组的特性：一旦初始化，大小就无法修改)。
@@ -149,7 +149,7 @@ queue.put("1");
 
 String string = queue.take();</pre>
 
-# 4\. 延迟队列 DelayQueue
+# 4. 延迟队列 DelayQueue
 
 DelayQueue 实现了 BlockingQueue 接口。
 DelayQueue 对元素进行持有直到一个特定的延迟到期。注入其中的元素必须实现 java.util.concurrent.Delayed 接口，该接口定义：
@@ -189,7 +189,7 @@ NANOSECONDS</pre>
 
 DelayedElement 是我所创建的一个 DelayedElement 接口的实现类，它不在 java.util.concurrent 包里。你需要自行创建你自己的 Delayed 接口的实现以使用 DelayQueue 类。
 
-# 5\. 链阻塞队列 LinkedBlockingQueue
+# 5. 链阻塞队列 LinkedBlockingQueue
 
 LinkedBlockingQueue 类实现了 BlockingQueue 接口。
 LinkedBlockingQueue 内部以一个链式结构(链接节点)对其元素进行存储。如果需要的话，这一链式结构可以选择一个上限。如果没有定义上限，将使用 Integer.MAX_VALUE 作为上限。
@@ -203,7 +203,7 @@ bounded.put("Value");
 
 String value = bounded.take();</pre>
 
-# 6\. 具有优先级的阻塞队列 PriorityBlockingQueue
+# 6. 具有优先级的阻塞队列 PriorityBlockingQueue
 
 PriorityBlockingQueue 类实现了 BlockingQueue 接口。
 PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.util.PriorityQueue 一样的排序规则。你无法向这个队列中插入 null 值。
@@ -219,14 +219,14 @@ PriorityBlockingQueue 是一个无界的并发队列。它使用了和类 java.u
 
     String value = queue.take();</pre>
 
-# 7\. 同步队列 SynchronousQueue
+# 7. 同步队列 SynchronousQueue
 
 SynchronousQueue 类实现了 BlockingQueue 接口。
 SynchronousQueue 是一个特殊的队列，它的内部同时只能够容纳单个元素。如果该队列已有一元素的话，试图向队列中插入一个新元素的线程将会阻塞，直到另一个线程将该元素从队列中抽走。同样，如果该队列为空，试图向队列中抽取一个元素的线程将会阻塞，直到另一个线程向队列中插入了一条新的元素。
 
 据此，把这个类称作一个队列显然是夸大其词了。它更多像是一个汇合点。
 
-# 8\. 阻塞双端队列 BlockingDeque
+# 8. 阻塞双端队列 BlockingDeque
 
 java.util.concurrent 包里的 BlockingDeque 接口表示一个线程安放入和提取实例的双端队列。本小节我将给你演示如何使用 BlockingDeque。
 BlockingDeque 类是一个双端队列，在不能够插入元素时，它将阻塞住试图插入元素的线程；在不能够抽取元素时，它将阻塞住试图抽取的线程。
@@ -296,7 +296,7 @@ deque.addLast("2");
 String two = deque.takeLast();
 String one = deque.takeFirst();</pre>
 
-# 9\. 链阻塞双端队列 LinkedBlockingDeque
+# 9. 链阻塞双端队列 LinkedBlockingDeque
 
 LinkedBlockingDeque 类实现了 BlockingDeque 接口。
 deque(双端队列) 是 "Double Ended Queue" 的缩写。因此，双端队列是一个你可以从任意一端插入或者抽取元素的队列。(译者注：唐僧啊，受不了。)
@@ -311,7 +311,7 @@ deque.addLast("2");
 String two = deque.takeLast();
 String one = deque.takeFirst();</pre>
 
-# 10\. 并发 Map(映射) ConcurrentMap
+# 10. 并发 Map(映射) ConcurrentMap
 
 ## java.util.concurrent.ConcurrentMap
 
@@ -340,7 +340,7 @@ concurrentMap.put("key", "value");
 
 Object value = concurrentMap.get("key");</pre>
 
-# 11\. 并发导航映射 ConcurrentNavigableMap
+# 11. 并发导航映射 ConcurrentNavigableMap
 
 java.util.concurrent.ConcurrentNavigableMap 是一个支持并发访问的 java.util.NavigableMap，它还能让它的子 map 具备并发访问的能力。所谓的 "子 map" 指的是诸如 headMap()，subMap()，tailMap() 之类的方法返回的 map。
 
@@ -402,7 +402,7 @@ ConcurrentNavigableMap 接口还有其他一些方法可供使用，比如：
 
 关于这些方法更多信息参考官方 Java 文档。
 
-# 12\. 闭锁 CountDownLatch
+# 12. 闭锁 CountDownLatch
 
 java.util.concurrent.CountDownLatch 是一个并发构造，它允许一个或多个线程等待一系列指定操作的完成。
 CountDownLatch 以一个给定的数量初始化。countDown() 每被调用一次，这一数量就减一。通过调用 await() 方法之一，线程可以阻塞等待这一数量到达零。
@@ -462,7 +462,7 @@ public class Decrementer implements Runnable {
     }
 } </pre>
 
-# 13\. 栅栏 CyclicBarrier
+# 13. 栅栏 CyclicBarrier
 
 java.util.concurrent.CyclicBarrier 类是一种同步机制，它能够对处理一些算法的线程实现同步。换句话讲，它就是一个所有线程必须等待的一个栅栏，直到所有线程都到达这里，然后所有线程才可以继续做其他事情。图示如下：
 
@@ -584,7 +584,7 @@ Thread-0 done!
 <span style="background-color: rgb(255, 204, 153);">
 </span>
 
-# 14\. 交换机 Exchanger
+# 14. 交换机 Exchanger
 
 java.util.concurrent.Exchanger 类表示一种两个线程可以进行互相交换对象的会和点。这种机制图示如下：
 
@@ -643,7 +643,7 @@ ExchangerRunnable 代码：
 <span style="background-color: rgb(255, 204, 153);">
 </span>
 
-# 15\. 信号量 Semaphore
+# 15. 信号量 Semaphore
 
 java.util.concurrent.Semaphore 类是一个计数信号量。这就意味着它具备两个主要方法：
 
@@ -700,7 +700,7 @@ java.util.concurrent.Semaphore 类还有很多方法，比如：
 
 这些方法的细节请参考 Java 文档。
 
-# 16\. 执行器服务 ExecutorService
+# 16. 执行器服务 ExecutorService
 
 java.util.concurrent.ExecutorService 接口表示一个异步执行机制，使我们能够在后台执行任务。因此一个 ExecutorService 很类似于一个线程池。实际上，存在于 java.util.concurrent 包里的 ExecutorService 实现就是一个线程池实现。
 
@@ -881,7 +881,7 @@ executorService.shutdown();</pre>
 
 如果你想要立即关闭 ExecutorService，你可以调用 shutdownNow() 方法。这样会立即尝试停止所有执行中的任务，并忽略掉那些已提交但尚未开始处理的任务。无法担保执行任务的正确执行。可能它们被停止了，也可能已经执行结束。
 
-# 17\. 线程池执行者 ThreadPoolExecutor
+# 17. 线程池执行者 ThreadPoolExecutor
 
 java.util.concurrent.ThreadPoolExecutor 是 ExecutorService 接口的一个实现。ThreadPoolExecutor 使用其内部池中的线程执行给定任务(Callable 或者 Runnable)。
 ThreadPoolExecutor 包含的线程池能够包含不同数量的线程。池中线程的数量由以下变量决定：
@@ -915,7 +915,7 @@ ExecutorService threadPoolExecutor =
 
 但是，除非你确实需要显式为 ThreadPoolExecutor 定义所有参数，使用 java.util.concurrent.Executors 类中的工厂方法之一会更加方便，正如  [ExecutorService](http://blog.csdn.net/defonds/article/details/44021605#t41) 小节所述。 
 
-# 18\.  定时执行者服务 ScheduledExecutorService
+# 18.  定时执行者服务 ScheduledExecutorService
 
 java.util.concurrent.ScheduledExecutorService 是一个 ExecutorService， 它能够将任务延后执行，或者间隔固定时间多次执行。 任务由一个工作者线程异步执行，而不是由提交任务给 ScheduledExecutorService 的那个线程执行。
 
@@ -1012,7 +1012,7 @@ scheduleAtFixedRate() 方法中，period 被解释为前一个执行的开始和
 
 你可以使用从 ExecutorService 接口继承来的 shutdown() 或 shutdownNow() 方法将 ScheduledExecutorService 关闭。参见 ExecutorService 关闭部分以获取更多信息。
 
-# 19\. 使用 ForkJoinPool 进行分叉和合并
+# 19. 使用 ForkJoinPool 进行分叉和合并
 
 ForkJoinPool 在 Java 7 中被引入。它和 [ExecutorService](http://blog.csdn.net/defonds/article/details/44021605#t41) 很相似，除了一点不同。ForkJoinPool 让我们可以很方便地把任务分裂成几个更小的任务，这些分裂出来的任务也将会提交给 ForkJoinPool。任务可以继续分割成更小的子任务，只要它还能分割。可能听起来有些抽象，因此本节中我们将会解释 ForkJoinPool 是如何工作的，还有任务分割是如何进行的。
 
@@ -1188,7 +1188,7 @@ System.out.println("mergedResult = " + mergedResult); </pre>
 
 在你计划在自己的项目里使用 ForkJoinPool 之前最好读一下该篇文章。
 
-# 20\. 锁 Lock
+# 20. 锁 Lock
 
 java.util.concurrent.locks.Lock 是一个类似于 synchronized 块的线程同步机制。但是 Lock 比 synchronized 块更加灵活、精细。
 顺便说一下，在我的《[Java 并发指南](http://tutorials.jenkov.com/java-concurrency/index.html)》中我对如何实现你自己的锁进行了描述。
@@ -1238,7 +1238,7 @@ tryLock(long timeout, TimeUnit timeUnit) 的工作类似于 tryLock() 方法，�
 
 unlock() 方法对 Lock 实例解锁。一个 Lock 实现将只允许锁定了该对象的线程来调用此方法。其他(没有锁定该 Lock 对象的线程)线程对 unlock() 方法的调用将会抛一个未检查异常(RuntimeException)。
 
-# 21\. 读写锁 ReadWriteLock
+# 21. 读写锁 ReadWriteLock
 
 java.util.concurrent.locks.ReadWriteLock 读写锁是一种先进的线程锁机制。它能够允许多个线程在同一时间对某特定资源进行读取，但同一时间内只能有一个线程对其进行写入。
 读写锁的理念在于多个线程能够对一个共享资源进行读取，而不会导致并发问题。并发问题的发生场景在于对一个共享资源的读和写操作的同时进行，或者多个写操作并发进行。
@@ -1280,7 +1280,7 @@ readWriteLock.writeLock().unlock();</pre>
 
 注意如何使用 ReadWriteLock 对两种锁实例的持有。一个对读访问进行保护，一个队写访问进行保护。
 
-# 22\. 原子性布尔 AtomicBoolean
+# 22. 原子性布尔 AtomicBoolean
 
 AtomicBoolean 类为我们提供了一个可以用原子方式进行读和写的布尔值，它还拥有一些先进的原子性操作，比如 compareAndSet()。AtomicBoolean 类位于 java.util.concurrent.atomic 包，完整类名是为 java.util.concurrent.atomic.AtomicBoolean。本小节描述的 AtomicBoolean 是 Java 8 版本里的，而不是它第一次被引入的 Java 5 版本。
 AtomicBoolean 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换](http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html)》小节有解释。
@@ -1341,7 +1341,7 @@ boolean wasNewValueSet = atomicBoolean.compareAndSet(
 
 本示例对 AtomicBoolean 的当前值与 true 值进行比较，如果相等，将 AtomicBoolean 的值更新为 false。
 
-# 23\. 原子性整型 AtomicInteger   
+# 23. 原子性整型 AtomicInteger   
 
 AtomicInteger 类为我们提供了一个可以进行原子性读和写操作的 int 变量，它还包含一系列先进的原子性操作，比如 compareAndSet()。AtomicInteger 类位于 java.util.concurrent.atomic 包，因此其完整类名为 java.util.concurrent.atomic.AtomicInteger。本小节描述的 AtomicInteger 是 Java 8 版本里的，而不是它第一次被引入的 Java 5 版本。
 AtomicInteger 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换](http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html)》小节有解释。
@@ -1418,7 +1418,7 @@ AtomicInteger 类还提供了一些减小 AtomicInteger 的值的原子性方法
 
 decrementAndGet() 将 AtomicInteger 的值减一，并返回减一后的值。getAndDecrement() 也将 AtomicInteger 的值减一，但它返回的是减一之前的值。
 
-# 24\. 原子性长整型 AtomicLong
+# 24. 原子性长整型 AtomicLong
 
 AtomicLong 类为我们提供了一个可以进行原子性读和写操作的 long 变量，它还包含一系列先进的原子性操作，比如 compareAndSet()AtomicLong 类位于 java.util.concurrent.atomic 包，因此其完整类名为 java.util.concurrent.atomic.AtomicLong。本小节描述的 AtomicLong 是 Java 8 版本里的，而不是它第一次被引入的 Java 5 版本。
 AtomicLong 背后的设计理念在我的《Java 并发指南》主题的《[比较和交换](http://tutorials.jenkov.com/java-concurrency/compare-and-swap.html)》小节有解释。
@@ -1495,7 +1495,7 @@ AtomicLong 类还提供了一些减小 AtomicLong  的值的原子性方法。�
 
 decrementAndGet() 将 AtomicLong  的值减一，并返回减一后的值。getAndDecrement() 也将 AtomicLong  的值减一，但它返回的是减一之前的值。
 
-# 25\. 原子性引用型 AtomicReference
+# 25. 原子性引用型 AtomicReference
 
 AtomicReference 提供了一个可以被原子性读和写的对象引用变量。原子性的意思是多个想要改变同一个 AtomicReference 的线程不会导致 AtomicReference 处于不一致的状态。AtomicReference 还有一个 compareAndSet() 方法，通过它你可以将当前引用于一个期望值(引用)进行比较，如果相等，在该 AtomicReference 对象内部设置一个新的引用。
 
@@ -1573,4 +1573,4 @@ exchanged = atomicStringReference.compareAndSet(initialReference, newReference);
 System.out.println("exchanged: " + exchanged);</pre>
 
 本示例创建了一个带有一个初始引用的泛型化的 AtomicReference。之后两次调用 comparesAndSet()来对存储值和期望值进行对比，如果二者一致，为 AtomicReference 设置一个新的引用。第一次比较，存储的引用(initialReference)和期望的引用(initialReference)一致，所以一个新的引用(newReference)被设置给 AtomicReference，compareAndSet() 方法返回 true。第二次比较时，存储的引用(newReference)和期望的引用(initialReference)不一致，因此新的引用没有被设置给 AtomicReference，compareAndSet() 方法返回 false。
-原文链接：[http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。</div>
+原文链接：[http://tutorials.jenkov.com/java-util-concurrent/index.html](http://tutorials.jenkov.com/java-util-concurrent/index.html)。
