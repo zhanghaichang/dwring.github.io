@@ -87,4 +87,3 @@ public class Singleton {  
 
 [设计模式（二）——单例模式](http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=402577543&idx=1&sn=41c4bf5f46d13806668edacce130468b&scene=21#wechat_redirect)
 
-[乐观锁的一种实现方式——CAS](http://mp.weixin.qq.com/s?__biz=MzI3NzE0NjcwMg==&mid=2650120412&idx=1&sn=bbf5f5a17a27bd76ac9c47befe501338&scene=21#wechat_redirect)
