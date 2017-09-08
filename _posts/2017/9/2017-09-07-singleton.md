@@ -31,7 +31,7 @@ public class Singleton {  
     return SingletonHolder.INSTANCE;  
     }  
 }  
-```java
+```
 
 还有人回答的很简单：饿汉。很好，这个也是对的。
 
