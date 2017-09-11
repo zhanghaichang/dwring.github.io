@@ -1,8 +1,8 @@
 ---
 layout: post
 title: HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事
-category: java
-tags: [java]
+category: other
+tags: [other]
 ---
 
 **HTTP与现代化浏览器**
