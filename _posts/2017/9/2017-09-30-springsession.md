@@ -38,7 +38,8 @@ session一直都是我们做集群时需要解决的一个难题，过去我们�
 主要分为以下几个集成步骤： 
 1）引入依赖jar包 
 2）注解方式或者 xml方式配置 特定存储容器的存储方式，如redis的xml配置方式 spring.xml
-* 注解 SpringSessionConfig.java
+* 注解 SpringSessionConfig.java  
+
 ```java
 package com.dwring.config;
 
