@@ -160,6 +160,7 @@ public class SpringSessionConfig {
 ## Spring Session原理
 * 1.前面集成spring-sesion的第二步中，编写了一个配置类RedisHttpSessionConfig，它包含注解@EnableRedisHttpSession，并通过@Bean注解注册了一个RedisConnectionFactory到Spring容器中。
 而@EnableRedisHttpSession注解通过Import，引入了RedisHttpSessionConfiguration配置类。该配置类通过@Bean注解，向Spring容器中注册了一个SessionRepositoryFilter（SessionRepositoryFilter的依赖关系：SessionRepositoryFilter --> SessionRepository --> RedisTemplate --> RedisConnectionFactory）
+
 ```java
 package org.springframework.session.data.redis.config.annotation.web.http;  
   
@@ -188,6 +189,7 @@ public class RedisHttpSessionConfiguration implements ImportAware, BeanClassLoad
 }  
 ```
 * 2.集成spring-sesion的第四步中，我们编写了一个SpringSessionInitializer 类，它继承自AbstractHttpSessionApplicationInitializer。该类不需要重载或实现任何方法，它的作用是在Servlet容器初始化时，从Spring容器中获取一个默认名叫sessionRepositoryFilter的过滤器类（之前没有注册的话这里找不到会报错），并添加到Servlet过滤器链中。
+
 ```java
 package org.springframework.session.web.context;  
   
@@ -234,6 +236,7 @@ public abstract class AbstractHttpSessionApplicationInitializer implements WebAp
 }  
 ```
 SessionRepositoryFilter是一个优先级最高的javax.servlet.Filter，它使用了一个SessionRepositoryRequestWrapper类接管了Http Session的创建和管理工作。注意下面给出的是简化过的示例代码，与spring-session项目的源代码有所差异。
+
 ```java
 @Order(SessionRepositoryFilter.DEFAULT_ORDER)  
 public class SessionRepositoryFilter implements Filter {  
