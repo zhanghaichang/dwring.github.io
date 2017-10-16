@@ -62,16 +62,16 @@ spring-session是spring旗下的一个项目，把servlet容器实现的httpSess
 ```
 添加Maven依赖
 ```maven
-	<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-data-redis</artifactId>
-			<version>1.3.1.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>biz.paluch.redis</groupId>
-			<artifactId>lettuce</artifactId>
-			<version>3.5.0.Final</version>
-		</dependency>
+<dependency>
+ <groupId>org.springframework.session</groupId>
+  <artifactId>spring-session-data-redis</artifactId>
+  <version>1.3.1.RELEASE</version>
+</dependency>
+<dependency>
+ <groupId>biz.paluch.redis</groupId>
+  <artifactId>lettuce</artifactId>
+  <version>3.5.0.Final</version>
+</dependency>
 ```
  ### 如何在Redis中查看Session数据？
 * （1）Http Session数据在Redis中是以Hash结构存储的。
