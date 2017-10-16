@@ -40,12 +40,97 @@ spring-session是spring旗下的一个项目，把servlet容器实现的httpSess
 主要分为以下几个集成步骤： 
 1）引入依赖jar包 
 2）注解方式或者 xml方式配置 特定存储容器的存储方式，如redis的xml配置方式 spring.xml
+注解 SpringSessionConfig.java
+```java
+package com.dwring.config;
+
+import java.util.HashSet;
+import java.util.Set;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisClusterConfiguration;
+import org.springframework.data.redis.connection.RedisNode;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.session.data.redis.config.ConfigureRedisAction;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
+/**
+ * @ClassName SpringSessionConfig
+ * @Description TODO
+ * @author zhanghaichang
+ * @date: 2017年9月28日 下午12:45:47
+ *
+ */
+@Configuration
+@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 1800)
+public class SpringSessionConfig {
+	
+	 /**
+     * The Spring configuration is responsible for creating a Servlet Filter that
+     * replaces the HttpSession implementation with an implementation backed by Spring Session.
+     */
+    @Bean
+    public LettuceConnectionFactory connectionFactory() {
+        LettuceConnectionFactory connectionFactory = new LettuceConnectionFactory(redisClusterConfiguration());
+        return connectionFactory;
+    }
+    
+    /**
+     * 让Spring Session不再执行config命令
+     * @return
+     */
+    @Bean
+    public static ConfigureRedisAction configureRedisAction() {
+        return ConfigureRedisAction.NO_OP;
+    }
+
+	/**
+	 * redis集群配置
+	 * 
+	 * 配置redis集群的结点及其它一些属性
+	 * 
+	 * @return
+	 */
+	private RedisClusterConfiguration redisClusterConfiguration() {
+		RedisClusterConfiguration redisClusterConfig = new RedisClusterConfiguration();
+		redisClusterConfig.setClusterNodes(getClusterNodes());
+		redisClusterConfig.setMaxRedirects(3);
+		return redisClusterConfig;
+
+	}
+
+
+	/**
+	 * redis集群节点IP和端口的添加
+	 * 
+	 * 节点：RedisNode redisNode = new RedisNode("127.0.0.1",6379);
+	 * 
+	 * @return
+	 */
+	private Set<RedisNode> getClusterNodes() {
+		// 添加redis集群的节点
+		Set<RedisNode> clusterNodes = new HashSet<RedisNode>();
+		clusterNodes.add(new RedisNode("192.168.44.128", 6379));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7000));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7001));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7002));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7003));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7004));
+		clusterNodes.add(new RedisNode("192.168.44.128", 7005));
+		return clusterNodes;
+	}
+}
+```
 ```xml
 <context:annotation-config/>    
 /**  初始化一切spring-session准备，且把springSessionFilter放入IOC          **/
-<beanclass="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>   
+<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>   
 /** 这是存储容器的链接池 **/ 
-<beanclass="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory"/>
+<bean class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
+    <property name="hostName" value="127.0.0.1"/>
+    <property name="port" value="6379"/>
+    <property name="password" value="xxxxxxx"></property>
+</bean>
 ```
 我们知道Tomcat再启动的时候首先会去加载web.xml 文件，Tomcat启动的时候web.xml被加载的顺序：context-param -> listener -> filter -> servlet。我们在使用Spring Session的时候，我们配置了一个filter，配置代码如下：
 ```xml
