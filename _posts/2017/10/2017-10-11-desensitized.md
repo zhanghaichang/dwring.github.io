@@ -4,9 +4,6 @@ title:  数据脱敏
 category: java
 tags: [java]
 ---
-
-![](http://ohfk1r827.bkt.clouddn.com/cb9.jpg-1)
-
 ### [](#什么是数据脱敏？ "什么是数据脱敏？")什么是数据脱敏？
 
 百度百科是这样描述的：
