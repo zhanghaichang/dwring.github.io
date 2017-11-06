@@ -53,10 +53,10 @@ tags: [java]
 本次事务提交之前（事务提交时会释放事务过程中的锁），外界无法修改这些记录。  Hibernate 的悲观锁，也是基于数据库的锁机制实现。下面的代码实现了对查询记录的加锁：
 
 ```java
-       String hqlStr ="from TUser as user where user.name='Erica'";
-        Query query = session.createQuery(hqlStr);
-    	query.setLockMode("user",LockMode.UPGRADE); // 加锁
-       List userList = query.list();// 执行查询，获取数据
+String hqlStr ="from TUser as user where user.name='Erica'";
+Query query = session.createQuery(hqlStr);
+query.setLockMode("user",LockMode.UPGRADE); // 加锁
+List userList = query.list();// 执行查询，获取数据
 ```
 query.setLockMode 对查询语句中，特定别名所对应的记录进行加锁（我们为 TUser 类指定了一个别名 “user” ），这里也就是对 返回的所有 user 记录进行加锁。 
 
@@ -85,7 +85,7 @@ Hibernate 的加锁模式有： 
       Query.setLockMode
       Session.lock
 ```
-	注意，只有在查询开始之前（也就是 Hiberate 生成 SQL 之前）设定加锁，才会 真正通过数据库的锁机制进行加锁处理，否则，数据已经通过不包含 for update子句的 Select SQL 加载进来，所谓数据库加锁也就无从谈起。
+注意，只有在查询开始之前（也就是 Hiberate 生成 SQL 之前）设定加锁，才会 真正通过数据库的锁机制进行加锁处理，否则，数据已经通过不包含 for update子句的 Select SQL 加载进来，所谓数据库加锁也就无从谈起。
 
 为了更好的理解select... for update的锁表的过程，本人将要以mysql为例，进行相应的讲解
 
@@ -107,13 +107,12 @@ Hibernate 的加锁模式有： 
 
  ![](http://images.cnitblog.com/blog2015/449787/201504/020030112323775.png)
 
-到这里，悲观锁机制你应该了解一些了吧.需要注意的是for update要放到mysql的事务中，即begin和commit中，否者不起作用。至于是锁住整个表还是锁住选中的行，请参考:[http://www.cnblogs.com/xiohao/p/4385768.html](http://www.cnblogs.com/xiohao/p/4385768.html)至于hibernate中的悲观锁使用起来比较简单，这里就不写demo了~感兴趣的自己查一下就ok了~
+到这里，悲观锁机制你应该了解一些了吧.需要注意的是for update要放到mysql的事务中，即begin和commit中，否者不起作用。至于是锁住整个表还是锁住选中的行，请参考:[http://www.cnblogs.com/xiohao/p/4385768.html](http://www.cnblogs.com/xiohao/p/4385768.html)至于hibernate中的悲观锁使用起来比较简单，这里就不写demo了.感兴趣的自己查一下就ok了~
 
 ## 乐观锁(Optimistic Locking)
 
 相对悲观锁而言，乐观锁机制采取了更加宽松的加锁机制。悲观锁大多数情况下依 靠数据库的锁机制实现，以保证操作最大程度的独占性。但随之而来的就是数据库 性能的大量开销，特别是对长事务而言，这样的开销往往无法承受。 如一个金融系统，当某个操作员读取用户的数据，并在读出的用户数
-据的基础上进 行修改时（如更改用户帐户余额），如果采用悲观锁机制，也就意味着整个操作过 程中（从操作员读出数据、开始修改直至提交修改结果的全过程，甚至还包括操作 员中途去煮咖啡的时间），数据库记录始终处于加锁状态，可以想见，如果面对几 百上千个并发，这样的情况将导致怎样的后果。 乐
-观锁机制在一定程度上解决了这个问题。
+据的基础上进 行修改时（如更改用户帐户余额），如果采用悲观锁机制，也就意味着整个操作过 程中（从操作员读出数据、开始修改直至提交修改结果的全过程，甚至还包括操作 员中途去煮咖啡的时间），数据库记录始终处于加锁状态，可以想见，如果面对几 百上千个并发，这样的情况将导致怎样的后果。乐观锁机制在一定程度上解决了这个问题。
 
 乐观锁，大多是基于数据版本   Version ）记录机制实现。何谓数据版本？即为数据增加一个版本标识，在基于数据库表的版本解决方案中，一般是通过为数据库表增加一个 “version” 字段来 实现。 读取出数据时，将此版本号一同读出，之后更新时，对此版本号加一。此时，将提 交数据的版本数据与数据
 库表对应记录的当前版本信息进行比对，如果提交的数据 版本号大于数据库表当前版本号，则予以更新，否则认为是过期数据。对于上面修改用户帐户信息的例子而言，假设数据库中帐户信息表中有一个 version 字段，当前值为1；
@@ -360,9 +359,7 @@ hibernate中如何实现乐观锁：
 2）提交成功后，版本号version ++
 
 
-实现很简单：在ormapping增加一属性**optimistic-lock="version"**即可，以下是样例片段
-
-<hibernate-mapping>
+实现很简单：在ormapping增加一属性**optimistic-lock="version"**即可，以下是样例片段<hibernate-mapping>
 
 ```xml
 <class name="com.insigma.stock.ABC" **optimistic-lock="version"** table="T_Stock" schema="STOCK">
@@ -454,11 +451,11 @@ hibernate中如何实现乐观锁：
 
 **三、基本的方案介绍**
 
-![java高并发，如何解决，什么方式解决](http://img2.ph.126.net/2a0tfDJR7uatb5_y5Rmtaw==/6597692090237434452.jpg)
+![](http://img2.ph.126.net/2a0tfDJR7uatb5_y5Rmtaw==/6597692090237434452.jpg)
 
 其中，对于 URL Rewriter的部分，可以使用收费或者开源的工具来实现，如果 url不是特别的复杂，可以考虑在 servlet 中实现，那么就是下面这个样子：
 
-![java高并发，如何解决，什么方式解决](http://img9.ph.126.net/qPguKdwKkA06HDeKgpn0FA==/6597764658004868229.jpg)
+![](http://img9.ph.126.net/qPguKdwKkA06HDeKgpn0FA==/6597764658004868229.jpg)
 
 总 结：其实我们在开发中都很少考虑这种问题，直接都是先将功能实现，当一个程序员在干到1到2年，就会感觉光实现功能不是最主要的，安全性能、质量等等才是 一个开发人员最该关心的。今天我所说的是高并发。
 
@@ -469,7 +466,6 @@ hibernate中如何实现乐观锁：
 2、分布式缓存数据库
 
 3、代码优化
-
 
 ## Java高并发的例子
 
