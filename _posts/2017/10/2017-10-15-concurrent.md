@@ -36,12 +36,12 @@ tags: [java]
 
 ## 2、如何处理并发和同步
 
-	今天讲的如何处理并发和同同步问题主要是通过锁机制。 我们需要明白，锁机制有两个层面。一种是代码层次上的，如java中的同步锁，典型的就是同步关键字synchronized，这里我不在做过多的讲解，
-感兴趣的可以参考:[http://www.cnblogs.com/xiohao/p/4151408.html](http://www.cnblogs.com/xiohao/p/4151408.html)
+今天讲的如何处理并发和同同步问题主要是通过锁机制。 我们需要明白，锁机制有两个层面。一种是代码层次上的，如java中的同步锁，典型的就是同步关键字synchronized，这里我不在做过多的讲解，感兴趣的可以参考:[http://www.cnblogs.com/xiohao/p/4151408.html](http://www.cnblogs.com/xiohao/p/4151408.html)
 
 另外一种是数据库层次上的，比较典型的就是悲观锁和乐观锁。这里我们重点讲解的就是悲观锁（传统的物理锁）和乐观锁。
 
 * 悲观锁(Pessimistic Locking):  
+
 悲观锁，正如其名，它指的是对数据被外界（包括本系统当前的其他事务，以及来自 外部系统的事务处理）修改持保守态度，因此，在整个数据处理过程中，将数据处于锁定状态。悲观锁的实现，往往依靠数据库提供的锁机制（也只有数据库层提供的锁机制才能 真正保证数据访问的排他性，否则，即使在本系统 中实现了加锁机制，也无法保证外部系 统不会修改数据）。 
 
 一个典型的倚赖数据库的悲观锁调用： 
@@ -359,9 +359,10 @@ hibernate中如何实现乐观锁：
 2）提交成功后，版本号version ++
 
 
-实现很简单：在ormapping增加一属性**optimistic-lock="version"**即可，以下是样例片段<hibernate-mapping>
+实现很简单：在ormapping增加一属性**optimistic-lock='version'**即可，以下是样例片段
 
 ```xml
+<hibernate-mapping>
 <class name="com.insigma.stock.ABC" **optimistic-lock="version"** table="T_Stock" schema="STOCK">
 ```
 
@@ -425,7 +426,7 @@ hibernate中如何实现乐观锁：
 
 一种是使用缓存、另一种是使用生成静态页面；还有就是从最基础的地方优化我们写代码减少不必要的资源浪费：
 
-1.不要频繁的new对象,对于在整个应用中只需要存在一个实例的类使用单例模式.对于String的连接操作,使用StringBuffer或者StringBuilder.对于utility类型的类通过静态方法来访问。
+1.不要频繁的new对象,对于在整个应用中只需要存在一个实例的类使用单例模式.对于String的连接操作,使用StringBuffer或者StringBuilder.对于utility类型的类通过静态方法来访问.
 
 2. 避免使用错误的方式,如Exception可以控制方法推出,但是Exception要保留stacktrace消耗性能,除非必要不要使用 instanceof做条件判断,尽量使用比的条件判断方式.使用JAVA中效率高的类,比如ArrayList比Vector性能好。)
 
