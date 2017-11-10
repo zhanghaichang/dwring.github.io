@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Spring Boot & Spring MVC 异常处理的N种方法
+title:  Spring Boot & Spring MVC
 category: java
 tags: [java]
 ---
