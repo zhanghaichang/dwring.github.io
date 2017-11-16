@@ -4,8 +4,6 @@ title:  Java 高并发综合
 category: java
 tags: [java]
 ---
-http://www.codeceo.com/article/talk-about-concurrency.html
-
 在一般性开发中，笔者经常看到很多同学在对待java并发开发模型中只会使用一些基础的方法。比如<span class="wp_keywordlink">[Volatile](http://www.codeceo.com/article/java-volatile-var.html "Volatile")</span>，synchronized。像Lock和atomic这类高级并发包很多人并不经常使用。我想大部分原因都是来之于对原理的不属性导致的。在繁忙的开发工作中，又有谁会很准确的把握和使用正确的并发模型呢？
 
 所以最近基于这个思想，本人打算把并发控制机制这部分整理成一篇文章。既是对自己掌握知识的一个回忆，也是希望这篇讲到的类容能帮助到大部分开发者。
@@ -633,7 +631,7 @@ AtomicThread spend:46ms, v=1000002
 ```
 
 相信这样的测试结果将内部锁和非阻塞同步算法的性能差异体现的非常明显。因此笔者更推荐直接视同atomic下的这个原子类。
-
+http://www.codeceo.com/article/talk-about-concurrency.html
 ## 结束语
 
 终于把想表达的这些东西整理完成了，其实还有一些想CountDownLatch这样的类没有讲到。不过上面的所讲到的绝对是并发编程中的核心。也许有些读者朋友能在网上看到很多这样的知识点，但是个人还是觉得知识只有在对比的基础上才能找到它合适的使用场景。因此，这也是笔者整理这篇文章的原因，也希望这篇文章能帮到更多的同学。
