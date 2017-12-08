@@ -5,7 +5,6 @@ category: interview
 tags: [interview]
 ---
 
-
 1.  HashMap相关
 
 HashMap一直是经典的面试题，所有面试官都喜欢问他，因为它可以牵扯出非常多的知识点，而面试者到底能了解到何种程度，则一定程度反映其综合能力。
