@@ -4,9 +4,7 @@ title: 给初中级JAVA准备的面试题
 category: interview
 tags: [interview]
 ---
-
 1.  HashMap相关
-
 HashMap一直是经典的面试题，所有面试官都喜欢问他，因为它可以牵扯出非常多的知识点，而面试者到底能了解到何种程度，则一定程度反映其综合能力。
 
 细节聊扩容因子LoadFactor=0.75，初始大小InitailCapacity=16
