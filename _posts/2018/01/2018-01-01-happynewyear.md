@@ -7,9 +7,9 @@ tags: [other]
 
 # Happy New Year 2018
 
-#TODO LIST
-* 1.
-* 2.
-* 3.
-* 4.
-* 5.
+# TODO LIST
+* 1
+* 2
+* 3
+* 4
+* 5
