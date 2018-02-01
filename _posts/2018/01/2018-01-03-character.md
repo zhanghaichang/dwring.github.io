@@ -72,7 +72,7 @@ Filef=newFile(&quot;d:&quot;&#43;File.separator&#43;&quot;test.txt&quot;);//声�
  //第4步：关闭输出流
  //out.close();
  //此时没有关闭
- }
+  }
  }
 ```
 
@@ -124,10 +124,9 @@ Filef=newFile(&quot;d:&quot;&#43;File.separator&#43;&quot;test.txt&quot;);//声�
  //第4步：关闭输出流
  //out.close();
  //此时没有关闭
- }
+  }
  }
 ```
-
 
 程序运行结果：
 
@@ -135,46 +134,30 @@ Filef=newFile(&quot;d:&quot;&#43;File.separator&#43;&quot;test.txt&quot;);//声�
 
 此时，文件中已经存在了内容，更进一步证明内容是保存在缓冲区的。这一点在读者日后的开发中要特别引起注意。
 
-提问：使用字节流好还是字符流好？
+#### 提问：使用字节流好还是字符流好？
 
 学习完字节流和字符流的基本操作后，已经大概地明白了操作流程的各个区别，那么在开发中是使用字节流好还是字符流好呢？
 
-回答：使用字节流更好。
+#### 回答：使用字节流更好。
 
 在回答之前，先为读者讲解这样的一个概念，所有的文件在硬盘或在传输时都是以字节的方式进行的，包括图片等都是按字节的方式存储的，而字符是只有在内存中才会形成，所以在开发中，字节流使用较为广泛。
 
-字节流与字符流主要的区别是他们的的处理方式
+#### 字节流与字符流主要的区别是他们的的处理方式
 
 流分类：
 
-1.Java的字节流
+* 1.Java的字节流
 
  InputStream是所有字节输入流的祖先，而OutputStream是所有字节输出流的祖先。
 
-2.Java的字符流
+* 2.Java的字符流
 
- Reader是所有读取字符串输入流的祖先，而writer是所有输出字符串的祖先。
+Reader是所有读取字符串输入流的祖先，而writer是所有输出字符串的祖先。
 
-InputStream，OutputStream,Reader,writer都是抽象类。所以不能直接new 
+InputStream，OutputStream,Reader,writer都是抽象类。所以不能直接new 字节流是最基本的，所有的InputStream和OutputStream的子类都是,主要用在处理二进制数据，它是按字节来处理的
 
-字节流是最基本的，所有的InputStream和OutputStream的子类都是,主要用在处理二进制数据，它是按字节来处理的
+但实际中很多的数据是文本，又提出了字符流的概念，它是按虚拟机的encode来处理，也就是要进行字符集的转化,这两个之间通过 InputStreamReader,OutputStreamWriter来关联，实际上是通过byte[]和String来关联.在实际开发中出现的汉字问题实际上都是在字符流和字节流之间转化不统一而造成的在从字节流转化为字符流时，实际上就是byte[]转化为String时，public String(byte bytes[], String charsetName)有一个关键的参数字符集编码，通常我们都省略了，那系统就用操作系统的lang,而在字符流转化为字节流时，实际上是String转化为byte[]时，byte[] String.getBytes(String charsetName)也是一样的道理.
 
-但实际中很多的数据是文本，又提出了字符流的概念，它是按虚拟机的encode来处理，也就是要进行字符集的转化
-
-这两个之间通过 InputStreamReader,OutputStreamWriter来关联，实际上是通过byte[]和String来关联
-
-在实际开发中出现的汉字问题实际上都是在字符流和字节流之间转化不统一而造成的
-
-在从字节流转化为字符流时，实际上就是byte[]转化为String时，
-
-public String(byte bytes[], String charsetName)
-
-有一个关键的参数字符集编码，通常我们都省略了，那系统就用操作系统的lang
-
-而在字符流转化为字节流时，实际上是String转化为byte[]时，
-
-byte[] String.getBytes(String charsetName)
-
-也是一样的道理至于java.io中还出现了许多其他的流，按主要是为了提高性能和使用方便，如BufferedInputStream,PipedInputStream等
+至于java.io中还出现了许多其他的流，按主要是为了提高性能和使用方便，如BufferedInputStream,PipedInputStream等.
 
                     
