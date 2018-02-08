@@ -41,7 +41,6 @@ Filef=newFile(&quot;d:&quot;&#43;File.separator&#43;&quot;test.txt&quot;);//声�
  }
 ```
 
-
 程序运行结果：
 
 ![](http://images.51cto.com/files/uploadimg/20090731/162806761.jpg)
