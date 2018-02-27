@@ -5,8 +5,6 @@ category: other
 tags: [other]
 ---
 
-
-
 # 1 前言
 
     服务注册中心，给客户端提供可供调用的服务列表，客户端在进行远程服务调用时，根据服务列表然后选择服务提供方的服务地址进行服务调用。服务注册中心在分布式系统中大量应用，是分布式系统中不可或缺的组件，例如rocketmq的name server，hdfs中的namenode，dubbo中的zk注册中心，spring cloud中的服务注册中心eureka。
@@ -15,13 +13,9 @@ tags: [other]
 
    著名的CAP理论指出，一个分布式系统不可能同时满足C(一致性)、A(可用性)和P(分区容错性)。由于分区容错性在是分布式系统中必须要保证的，因此我们只能在A和C之间进行权衡。在此Zookeeper保证的是CP, 而Eureka则是AP。
 
-
-
 # 2 Zookeeper保证CP
 
     当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的注册信息，但不能接受服务直接down掉不可用。也就是说，服务注册功能对可用性的要求要高于一致性。但是zk会出现这样一种情况，当master节点因为网络故障与其他节点失去联系时，剩余节点会重新进行leader选举。问题在于，选举leader的时间太长，30 ~ 120s, 且选举期间整个zk集群都是不可用的，这就导致在选举期间注册服务瘫痪。在云部署的环境下，因网络问题使得zk集群失去master节点是较大概率会发生的事，虽然服务能够最终恢复，但是漫长的选举时间导致的注册长期不可用是不能容忍的。
-
-
 
 # 3 Eureka保证AP
 
@@ -32,8 +26,6 @@ tags: [other]
 
  因此， Eureka可以很好的应对因网络故障导致部分节点失去联系的情况，而不会像zookeeper那样使整个注册服务瘫痪。
 
-
-
 # 4 更深入的探讨
 
 下面转发一篇更深入探讨zookeeper与eureka作为注册中心区别的问题，文章转发自
@@ -41,18 +33,14 @@ tags: [other]
 [http://dockone.io/article/78](http://dockone.io/article/78) ，该文翻译了国外的一篇文章。
 
 
-
 ## 4.1 为什么不应该使用ZooKeeper做服务发现
 
 【编者的话】本文作者通过ZooKeeper与Eureka作为[Service发现服务](http://www.ibm.com/developerworks/cn/education/webservices/ws-psuddi/ws-psuddi.html)（注：WebServices体系中的UDDI就是个发现服务）的优劣对比，分享了Knewton在云计算平台部署服务的经验。本文虽然略显偏激，但是看得出Knewton在云平台方面是非常有经验的，这篇文章从实践角度出发分别从云平台特点、CAP原理以及运维三个方面对比了ZooKeeper与Eureka两个系统作为发布服务的优劣，并提出了在云平台构建发现服务的方法论。
 
 
-
 ## 4.2 背景
 
 很多公司选择使用[ZooKeeper](http://zookeeper.apache.org/)作为Service发现服务（Service Discovery），但是在构建[Knewton](https://www.knewton.com/)（Knewton是一个提供个性化教育平台的公司、学校和出版商可以通过Knewton平台为学生提供自适应的学习材料）平台时，我们发现这是个根本性的错误。在这边文章中，我们将用我们在实践中遇到的问题来说明，为什么使用ZooKeeper做Service发现服务是个错误。
-
-
 
 ## 4.3 请留意服务部署环境
 
@@ -77,8 +65,6 @@ ZooKeeper（注：ZooKeeper是著名Hadoop的一个子项目，旨在解决大�
 
 如果抛开CAP原理不管，正确的设置与维护ZooKeeper服务就非常的困难；错误会[经常发生](http://www.infoq.com/presentations/Misconfiguration-ZooKeeper)，导致很多工程被建立只是为了减轻维护ZooKeeper的难度。这些错误不仅存在与客户端而且还存在于ZooKeeper服务器本身。Knewton平台很多故障就是由于ZooKeeper使用不当而导致的。那些看似简单的操作，如：正确的重建观察者（reestablishing watcher）、客户端Session与异常的处理与在ZK窗口中管理内存都是非常容易导致ZooKeeper出错的。同时，我们确实也遇到过ZooKeeper的一些经典bug：[ZooKeeper-1159](https://issues.apache.org/jira/browse/ZooKeeper-1159) 与[ZooKeeper-1576](https://issues.apache.org/jira/browse/ZooKeeper-1576)；我们甚至在生产环境中遇到过ZooKeeper选举Leader节点失败的情况。这些问题之所以会出现，在于ZooKeeper需要管理与保障所管辖服务群的Session与网络连接资源（注：这些资源的管理在分布式系统环境下是极其困难的）；但是它不负责管理服务的发现，所以使用ZooKeeper当Service发现服务得不偿失。
 
- 
-
 ## 4.5 做出正确的选择：Eureka的成功
 
 我们把Service发现服务从ZooKeeper切换到了Eureka平台，它是一个开源的服务发现解决方案，由Netflix公司开发。（注：Eureka由两个组件组成：Eureka服务器和Eureka客户端。Eureka服务器用作服务注册服务器。Eureka客户端是一个java客户端，用来简化与服务器的交互、作为轮询负载均衡器，并提供服务的故障切换支持。）Eureka一开始就被设计成高可用与可伸缩的Service发现服务，这两个特点也是Netflix公司开发所有平台的两个特色。（[他们都在讨论Eureka](http://techblog.netflix.com/2011/12/making-netflix-api-more-resilient.html)）。自从切换工作开始到现在，我们实现了在生产环境中所有依赖于Eureka的产品没有下线维护的记录。我们也被告知过，在云平台做服务迁移注定要遇到失败；但是我们从这个例子中得到的经验是，一个优秀的Service发现服务在其中发挥了至关重要的作用！
@@ -98,4 +84,6 @@ Eureka的构架保证了它能够成为Service发现服务。它相对与ZooKeep
 
 ## 4.6 结论
 
-关于Service发现服务通过本文我们想说明两点：1、留意服务运行的硬件平台；2、时刻关注你要解决的问题，然后决定使用什么平台。Knewton就是从这两个方面考虑使用Eureka替换ZooKeeper来作为service发现服务的。云部署平台是充满不可靠性的，Eureka可以应对这些缺陷；同时Service发现服务必须同时具备高可靠性与高弹性，Eureke就是我们想要的！
+关于Service发现服务通过本文我们想说明两点：
+* 1、留意服务运行的硬件平台；
+* 2、时刻关注你要解决的问题，然后决定使用什么平台。Knewton就是从这两个方面考虑使用Eureka替换ZooKeeper来作为service发现服务的。云部署平台是充满不可靠性的，Eureka可以应对这些缺陷；同时Service发现服务必须同时具备高可靠性与高弹性，Eureke就是我们想要的！
